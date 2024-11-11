@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-// Main Calculator Component
 export default function Calculator() {
-  // State initialization 
   const [input, setInput] = useState("0");
 
-  // Handling Button presses
   const handleInput = (value) => {
-    // Resets the display to 0 when C is pressed
     if (value === "C") {    
       setInput("0");
     }
-    // Evaluates and updates the display
     else if (value === "=") {
       try {
         setInput(eval(input).toString()); 
@@ -20,21 +15,18 @@ export default function Calculator() {
         setInput("Error");
       }
     }
-    // Toggles the sign of the number
     else if (value === "+/-") {
       setInput((input) => (input.startsWith("-") ? input.slice(1) : "-" + input));
     }
-    // Converts number into percentage
     else if (value === "%") {
       setInput((parseFloat(input) / 100).toString());
     }
-    // For all other buttons
     else {
       setInput((input === "0" ? "" : input) + value);
     } 
   };
 
-  // Generate Calculator Buttons (reusable component)
+  // Generate Calculator Buttons
   const generateButton = (label) => {
     return (
       <TouchableOpacity style={styles.button} onPress={() => handleInput(label)}>
@@ -46,12 +38,11 @@ export default function Calculator() {
   // Layout Structure
   return (
     <View style={styles.container}>
-      {/* Calculator Display */}
+      
       <View style={styles.displayContainer}>
         <Text style={styles.displayText}>{input}</Text>
       </View>
 
-      {/* Calculator Buttons */}
       <View style={styles.row}>
         {["C", "+/-", "%", "/"].map((label) => generateButton(label))}
       </View>
