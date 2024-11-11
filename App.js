@@ -26,7 +26,7 @@ export default function Calculator() {
     }
     // Converts number into percentage
     else if (value === "%") {
-      setInput((parseFloat(input) / 100).toString()); // Convert to string after calculation
+      setInput((parseFloat(input) / 100).toString());
     }
     // For all other buttons
     else {
